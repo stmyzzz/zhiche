@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ssm.car.mapper.TcommentMapper">
+  <resultMap id="BaseResultMap" type="ssm.car.bean.Tcomment">
+    <result column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="tcname" jdbcType="VARCHAR" property="tcname" />
+    <result column="tcdate" jdbcType="VARCHAR" property="tcdate" />
+    <result column="tccontent" jdbcType="VARCHAR" property="tccontent" />
+    <result column="tcimg" jdbcType="VARCHAR" property="tcimg" />
+    <result column="tcintro" jdbcType="VARCHAR" property="tcintro" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    tid, uid, tcname, tcdate, tccontent, tcimg, tcintro
+  </sql>
+  <select id="selectByExample" parameterType="ssm.car.bean.TcommentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tcomment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="ssm.car.bean.TcommentExample">
+    delete from tcomment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="ssm.car.bean.Tcomment">
+    insert into tcomment (tid, uid, tcname, 
+      tcdate, tccontent, tcimg, 
+      tcintro)
+    values (#{tid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{tcname,jdbcType=VARCHAR}, 
+      #{tcdate,jdbcType=VARCHAR}, #{tccontent,jdbcType=VARCHAR}, #{tcimg,jdbcType=VARCHAR}, 
+      #{tcintro,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="ssm.car.bean.Tcomment">
+    insert into tcomment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="tcname != null">
+        tcname,
+      </if>
+      <if test="tcdate != null">
+        tcdate,
+      </if>
+      <if test="tccontent != null">
+        tccontent,
+      </if>
+      <if test="tcimg != null">
+        tcimg,
+      </if>
+      <if test="tcintro != null">
+        tcintro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="tcname != null">
+        #{tcname,jdbcType=VARCHAR},
+      </if>
+      <if test="tcdate != null">
+        #{tcdate,jdbcType=VARCHAR},
+      </if>
+      <if test="tccontent != null">
+        #{tccontent,jdbcType=VARCHAR},
+      </if>
+      <if test="tcimg != null">
+        #{tcimg,jdbcType=VARCHAR},
+      </if>
+      <if test="tcintro != null">
+        #{tcintro,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="ssm.car.bean.TcommentExample" resultType="java.lang.Long">
+    select count(*) from tcomment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tcomment
+    <set>
+      <if test="record.tid != null">
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tcname != null">
+        tcname = #{record.tcname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tcdate != null">
+        tcdate = #{record.tcdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tccontent != null">
+        tccontent = #{record.tccontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tcimg != null">
+        tcimg = #{record.tcimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tcintro != null">
+        tcintro = #{record.tcintro,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tcomment
+    set tid = #{record.tid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
+      tcname = #{record.tcname,jdbcType=VARCHAR},
+      tcdate = #{record.tcdate,jdbcType=VARCHAR},
+      tccontent = #{record.tccontent,jdbcType=VARCHAR},
+      tcimg = #{record.tcimg,jdbcType=VARCHAR},
+      tcintro = #{record.tcintro,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
